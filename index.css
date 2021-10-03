@@ -93,9 +93,8 @@ main .carousel-inner img {
 }
 
 .information-row {
-    height: 30vh;
+    height: 31vh;
 }
-
 
 #footer {
     background-color: var(--bottom_blue) ; 
