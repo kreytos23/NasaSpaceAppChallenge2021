@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/energy_sr1_2.js"></script>
+        <script src="data/puebla_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[19.602671769926612,-95.89365058076667],[21.024037345410076,-94.12248345496936]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_map_0');
+        map.getPane('pane_map_0').style.zIndex = 400;
+        var layer_map_0 = L.tileLayer('http://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            pane: 'pane_map_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_map_0;
+        map.addLayer(layer_map_0);
+        map.createPane('pane_GlobalNightLightLatest_1');
+        map.getPane('pane_GlobalNightLightLatest_1').style.zIndex = 401;
+        var layer_GlobalNightLightLatest_1 = L.tileLayer('http://realearth.ssec.wisc.edu/tiles/NightLightsColored/{z}/{x}/{y}.png', {
+            pane: 'pane_GlobalNightLightLatest_1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_GlobalNightLightLatest_1;
+        map.addLayer(layer_GlobalNightLightLatest_1);
+        function pop_energy_sr1_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Latitud'] !== null ? autolinker.link(feature.properties['Latitud'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Longitud'] !== null ? autolinker.link(feature.properties['Longitud'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Fuente primaria de energía</strong><br />' + (feature.properties['Fuente primaria de energía'] !== null ? autolinker.link(feature.properties['Fuente primaria de energía'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_energy_sr1_2_0(feature) {
+            switch(String(feature.properties['Fuente primaria de energía'])) {
+                case 'NULL':
+                    return {
+                pane: 'pane_energy_sr1_2',
+                shape: 'diamond',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,142,26,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Carbón':
+                    return {
+                pane: 'pane_energy_sr1_2',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,207,121,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Eólica':
+                    return {
+                pane: 'pane_energy_sr1_2',
+                radius: 11.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(82,213,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Gas natural':
+                    return {
+                pane: 'pane_energy_sr1_2',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,5,5,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Geotérmica':
+                    return {
+                pane: 'pane_energy_sr1_2',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,46,175,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hidroeléctrica':
+                    return {
+                pane: 'pane_energy_sr1_2',
+                radius: 11.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,252,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Nuclear':
+                    return {
+                pane: 'pane_energy_sr1_2',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,172,69,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Petróleo':
+                    return {
+                pane: 'pane_energy_sr1_2',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(158,249,22,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_energy_sr1_2');
+        map.getPane('pane_energy_sr1_2').style.zIndex = 402;
+        map.getPane('pane_energy_sr1_2').style['mix-blend-mode'] = 'normal';
+        var layer_energy_sr1_2 = new L.geoJson(json_energy_sr1_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_energy_sr1_2',
+            layerName: 'layer_energy_sr1_2',
+            pane: 'pane_energy_sr1_2',
+            onEachFeature: pop_energy_sr1_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_energy_sr1_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_energy_sr1_2);
+        map.addLayer(layer_energy_sr1_2);
+        function pop_puebla_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GID_0'] !== null ? autolinker.link(feature.properties['GID_0'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_0'] !== null ? autolinker.link(feature.properties['NAME_0'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GID_1'] !== null ? autolinker.link(feature.properties['GID_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_1'] !== null ? autolinker.link(feature.properties['NAME_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VARNAME_1'] !== null ? autolinker.link(feature.properties['VARNAME_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NL_NAME_1'] !== null ? autolinker.link(feature.properties['NL_NAME_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TYPE_1'] !== null ? autolinker.link(feature.properties['TYPE_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ENGTYPE_1'] !== null ? autolinker.link(feature.properties['ENGTYPE_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CC_1'] !== null ? autolinker.link(feature.properties['CC_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HASC_1'] !== null ? autolinker.link(feature.properties['HASC_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_puebla_3_0() {
+            return {
+                pane: 'pane_puebla_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_puebla_3');
+        map.getPane('pane_puebla_3').style.zIndex = 403;
+        map.getPane('pane_puebla_3').style['mix-blend-mode'] = 'normal';
+        var layer_puebla_3 = new L.geoJson(json_puebla_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_puebla_3',
+            layerName: 'layer_puebla_3',
+            pane: 'pane_puebla_3',
+            onEachFeature: pop_puebla_3,
+            style: style_puebla_3_0,
+        });
+        bounds_group.addLayer(layer_puebla_3);
+        map.addLayer(layer_puebla_3);
+        setBounds();
+        </script>
+    </body>
+</html>
