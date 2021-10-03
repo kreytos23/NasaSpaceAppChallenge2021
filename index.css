@@ -102,7 +102,7 @@ main .carousel-inner img {
 
 #footer {
     
-    background: linear-gradient(90deg, var(--soft-blue), var(--secondary-blue) 10%, #1e5372);
+    background: linear-gradient(90deg, var(--secondary-blue),var(--bottom_blue)  10%, #1e5372);
 }
 
 #footer a {
