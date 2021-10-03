@@ -44,6 +44,7 @@ body {
 
 .nav-background {
     background-color: var(--bottom_blue) !important;
+    color: white !important;
 }
 main .carousel-inner img {
     height: 80vh;

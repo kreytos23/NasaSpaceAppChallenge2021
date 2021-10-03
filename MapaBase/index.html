@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/MarkerCluster.css">
         <link rel="stylesheet" href="css/MarkerCluster.Default.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="../index.css">
         <style>
         #map {
             width: 1124px;
@@ -21,7 +21,33 @@
         <title></title>
     </head>
     <body>
-        <div id="map">
+        <header class="my-5 header">
+            <nav id="header" class="navbar navbar-expand-lg fixed-top nav-background text-white">
+                <div class="container">
+                    <a class="navbar-brand navTitle" href="#">
+                        <img src="../Assets/Tezcatlipoca.png" alt="platzi-logo">
+                        <span class="ms-3 text-white">Nasa Space App Challenge 2021</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fs-5">
+                            <li class="nav-item" class="text-platzi">
+                                <a class="nav-link" href="../index.html">Regresar</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container my-5" style="position: absolute;">
+            <div class="row">
+                <div class="col-10 offset-3" style="position: absolute;">
+                    <div id="map">
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
