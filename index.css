@@ -96,11 +96,11 @@ main .carousel-inner img {
     height: 31vh;
 }
 
-#footer {
+footer {
     background-color: var(--bottom_blue) ; 
 }
 
-#footer a {
+footer a {
     color: white;
     text-decoration: none;
 }
