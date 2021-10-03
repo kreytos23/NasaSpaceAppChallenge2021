@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="index.css">
+        <style>
+        #map {
+            width: 1124px;
+            height: 610px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/puebla_1.js"></script>
+        <script src="data/prueba_eolica_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[17.836363026249998,-100.6649256799301],[20.92742710375,-94.96069230006991]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_puebla_windspeed_100m_0');
+        map.getPane('pane_puebla_windspeed_100m_0').style.zIndex = 400;
+        var img_puebla_windspeed_100m_0 = 'data/puebla_windspeed_100m_0.png';
+        var img_bounds_puebla_windspeed_100m_0 = [[17.910768747734043,-98.97842731781132],[20.85576874773419,-96.65092731781121]];
+        var layer_puebla_windspeed_100m_0 = new L.imageOverlay(img_puebla_windspeed_100m_0,
+                                              img_bounds_puebla_windspeed_100m_0,
+                                              {pane: 'pane_puebla_windspeed_100m_0'});
+        bounds_group.addLayer(layer_puebla_windspeed_100m_0);
+        map.addLayer(layer_puebla_windspeed_100m_0);
+        function pop_puebla_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GID_0'] !== null ? autolinker.link(feature.properties['GID_0'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_0'] !== null ? autolinker.link(feature.properties['NAME_0'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GID_1'] !== null ? autolinker.link(feature.properties['GID_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_1'] !== null ? autolinker.link(feature.properties['NAME_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VARNAME_1'] !== null ? autolinker.link(feature.properties['VARNAME_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NL_NAME_1'] !== null ? autolinker.link(feature.properties['NL_NAME_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TYPE_1'] !== null ? autolinker.link(feature.properties['TYPE_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ENGTYPE_1'] !== null ? autolinker.link(feature.properties['ENGTYPE_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CC_1'] !== null ? autolinker.link(feature.properties['CC_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HASC_1'] !== null ? autolinker.link(feature.properties['HASC_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_puebla_1_0() {
+            return {
+                pane: 'pane_puebla_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,60,57,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_puebla_1');
+        map.getPane('pane_puebla_1').style.zIndex = 401;
+        map.getPane('pane_puebla_1').style['mix-blend-mode'] = 'normal';
+        var layer_puebla_1 = new L.geoJson(json_puebla_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_puebla_1',
+            layerName: 'layer_puebla_1',
+            pane: 'pane_puebla_1',
+            onEachFeature: pop_puebla_1,
+            style: style_puebla_1_0,
+        });
+        bounds_group.addLayer(layer_puebla_1);
+        map.addLayer(layer_puebla_1);
+        function pop_prueba_eolica_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LAT'] !== null ? autolinker.link(feature.properties['LAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LON'] !== null ? autolinker.link(feature.properties['LON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PAR'] !== null ? autolinker.link(feature.properties['PAR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TEXTO'] !== null ? autolinker.link(feature.properties['TEXTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_prueba_eolica_2_0() {
+            return {
+                pane: 'pane_prueba_eolica_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_prueba_eolica_2');
+        map.getPane('pane_prueba_eolica_2').style.zIndex = 402;
+        map.getPane('pane_prueba_eolica_2').style['mix-blend-mode'] = 'normal';
+        var layer_prueba_eolica_2 = new L.geoJson(json_prueba_eolica_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_prueba_eolica_2',
+            layerName: 'layer_prueba_eolica_2',
+            pane: 'pane_prueba_eolica_2',
+            onEachFeature: pop_prueba_eolica_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_prueba_eolica_2_0(feature));
+            },
+        });
+        var cluster_prueba_eolica_2 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_prueba_eolica_2.addLayer(layer_prueba_eolica_2);
+
+        bounds_group.addLayer(layer_prueba_eolica_2);
+        cluster_prueba_eolica_2.addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    </body>
+</html>
