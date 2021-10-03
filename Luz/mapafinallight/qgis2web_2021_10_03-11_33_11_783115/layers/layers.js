@@ -35,7 +35,7 @@ var lyr_energy_sr1_2 = new ol.layer.Vector({
                 declutter: true,
                 source:jsonSource_energy_sr1_2, 
                 style: style_energy_sr1_2,
-                interactive: false,
+                interactive: true,
     title: 'energy_sr (1)<br />\
     <img src="styles/legend/energy_sr1_2_0.png" /> Carbón<br />\
     <img src="styles/legend/energy_sr1_2_1.png" /> Eólica<br />\
