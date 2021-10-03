@@ -96,14 +96,9 @@ main .carousel-inner img {
     height: 30vh;
 }
 
-.abbr-platzi {
-    color: #82ad36;
-    text-decoration: none !important; 
-}
 
 #footer {
-    
-    background: linear-gradient(90deg, var(--secondary-blue),var(--bottom_blue)  10%, #1e5372);
+    background-color: var(--bottom_blue) ; 
 }
 
 #footer a {
